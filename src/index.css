@@ -2,6 +2,85 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Reset and dark mode body styles */
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: white;
+  transition: background-color 0.3s ease;
+}
+
+.dark body {
+  background-color: #000000;
+}
+
+.dark html {
+  background-color: #000000;
+}
+
+#root {
+  min-height: 100vh;
+  width: 100%;
+}
+
+/* Ensure all sections extend to full width */
+section, nav, footer, main {
+  width: 100%;
+}
+
+/* Custom scrollbar for dark mode */
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
+/* Dark mode scrollbar */
+.dark ::-webkit-scrollbar-track {
+  background: #000000;
+}
+
+.dark ::-webkit-scrollbar-thumb {
+  background: #333333;
+  border-radius: 4px;
+}
+
+.dark ::-webkit-scrollbar-thumb:hover {
+  background: #84cc16;
+}
+
+/* Firefox scrollbar */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #c1c1c1 #f1f1f1;
+}
+
+.dark html {
+  scrollbar-color: #333333 #000000;
+}
+
 /* Custom animations */
 @keyframes fadeInUp {
   from {
