@@ -133,21 +133,22 @@ function Home() {
     <div className={`min-h-screen w-full transition-colors duration-300 ${isDarkMode ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
       {/* Navigation */}
       <nav className={`fixed top-0 left-0 right-0 w-full backdrop-blur-sm z-50 transition-all duration-300 ${isDarkMode ? 'bg-black/95' : 'bg-white/95'}`}>
-        <div className={`transition-all duration-300 ${isScrolled ? 'py-2' : 'py-4'}`}>
-          <div className="max-w-6xl mx-auto px-6 lg:px-12">
+        <div className={`transition-all duration-300 ${isScrolled ? 'py-2' : 'py-3 sm:py-4'}`}>
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
             <div className="flex justify-center items-center w-full">
               {/* Centered Navigation Container */}
-              <div className={`flex items-center space-x-6 px-6 py-2 rounded-full border-2 transition-all duration-300 hover:shadow-md ${isDarkMode ? 'bg-gray-900/80 border-lime-400/30 hover:border-lime-400/50 hover:bg-gray-900' : 'bg-white/50 border-gray-300 hover:border-gray-800 hover:bg-white'}`}>
+              <div className={`flex items-center space-x-3 sm:space-x-6 px-3 sm:px-6 py-2 rounded-full border-2 transition-all duration-300 hover:shadow-md ${isDarkMode ? 'bg-gray-900/80 border-lime-400/30 hover:border-lime-400/50 hover:bg-gray-900' : 'bg-white/50 border-gray-300 hover:border-gray-800 hover:bg-white'}`}>
                 {isScrolled ? (
                   <>
-                    <div className={`font-medium text-sm px-4 py-2 rounded-full transition-colors flex items-center space-x-2 ${isDarkMode ? 'text-lime-400 bg-gray-800 hover:bg-gray-700' : 'text-gray-600 bg-gray-100 hover:bg-gray-200'}`}>
-                      <div className="w-2 h-2 bg-lime-400 rounded-full animate-pulse"></div>
-                      <span>Available for work</span>
+                    <div className={`font-medium text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2 rounded-full transition-colors flex items-center space-x-1 sm:space-x-2 ${isDarkMode ? 'text-lime-400 bg-gray-800 hover:bg-gray-700' : 'text-gray-600 bg-gray-100 hover:bg-gray-200'}`}>
+                      <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-lime-400 rounded-full animate-pulse"></div>
+                      <span className="hidden sm:inline">Available for work</span>
+                      <span className="sm:hidden">Available</span>
                     </div>
                     {/* Dark Mode Toggle */}
                     <button
                       onClick={toggleDarkMode}
-                      className={`w-10 h-5 rounded-full relative cursor-pointer transition-all duration-300 ${isDarkMode ? 'bg-lime-400' : 'bg-gray-300'}`}
+                      className={`w-8 sm:w-10 h-4 sm:h-5 rounded-full relative cursor-pointer transition-all duration-300 ${isDarkMode ? 'bg-lime-400' : 'bg-gray-300'}`}
                     >
                       <div className={`w-3 h-3 bg-white rounded-full absolute top-1 transition-all duration-300 shadow-sm ${isDarkMode ? 'translate-x-6' : 'translate-x-1'}`}></div>
                     </button>
@@ -207,29 +208,29 @@ function Home() {
       )}
 
       {/* Hero Section */}
-      <section className="pt-24 pb-20 px-6 lg:px-12 h-screen flex items-center">
+      <section className="pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-12 min-h-screen flex items-center">
         <div className="max-w-7xl mx-auto w-full">
           {/* Main Layout: Three columns fitting the page */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-16 items-center h-full">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-16 items-center h-full">
             
             {/* Left Content - Name and FULL STACK */}
-            <div className="flex flex-col justify-center space-y-4">
+            <div className="flex flex-col justify-center space-y-3 sm:space-y-4 text-center lg:text-left">
               {/* Name above FULL STACK */}
               <div>
-                <h2 className={`text-lg font-normal tracking-[0.3em] uppercase mb-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                <h2 className={`text-sm sm:text-base lg:text-lg font-normal tracking-[0.2em] sm:tracking-[0.3em] uppercase mb-3 sm:mb-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                   ELVIS OSEI
                 </h2>
-                <h1 className={`text-5xl lg:text-6xl xl:text-7xl font-black leading-[0.85] tracking-tight ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black leading-[0.85] tracking-tight ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                   FULL STACK
                 </h1>
               </div>
             </div>
 
             {/* Center Content - Profile Image with Dark Mode Toggle */}
-            <div className="relative flex justify-center items-center">
+            <div className="relative flex justify-center items-center order-first lg:order-none">
               <div className="relative">
                 {/* Main Profile Image Container */}
-                <div className="w-72 h-80 lg:w-80 lg:h-96 xl:w-[350px] xl:h-[420px] rounded-3xl overflow-hidden bg-gray-200 hover:scale-105 transition-transform duration-500 cursor-pointer group shadow-2xl">
+                <div className="w-64 h-72 sm:w-72 sm:h-80 md:w-80 md:h-96 lg:w-80 lg:h-96 xl:w-[350px] xl:h-[420px] rounded-2xl sm:rounded-3xl overflow-hidden bg-gray-200 hover:scale-105 transition-transform duration-500 cursor-pointer group shadow-2xl">
                   <img 
                     src={profileImage}
                     alt="Profile" 
@@ -279,17 +280,17 @@ function Home() {
             </div>
 
             {/* Right Content - DEVELOPER and Description */}
-            <div className="flex flex-col justify-center space-y-6">
+            <div className="flex flex-col justify-center space-y-4 sm:space-y-6 text-center lg:text-left">
               {/* DEVELOPER title */}
               <div>
-                <h1 className={`text-5xl lg:text-6xl xl:text-7xl font-black leading-[0.85] tracking-tight ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black leading-[0.85] tracking-tight ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                   DEVELOPER
                 </h1>
               </div>
 
               {/* Description below DEVELOPER */}
-              <div className="max-w-sm">
-                <p className={`leading-relaxed text-base ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+              <div className="max-w-sm mx-auto lg:mx-0">
+                <p className={`leading-relaxed text-sm sm:text-base ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                   I'm a Ghana-based full-stack developer and aspiring robotics engineer passionate about 
                   crafting meaningful digital experiences.
                 </p>
@@ -300,34 +301,34 @@ function Home() {
       </section>
 
       {/* Services Section */}
-      <section id="services-section" className={`py-20 px-6 lg:px-12 relative overflow-hidden transition-colors duration-500 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <section id="services-section" className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-12 relative overflow-hidden transition-colors duration-500 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
         {/* Background decorative elements */}
-        <div className="absolute top-20 left-10 w-32 h-32 bg-blue-100 rounded-full opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-20 right-10 w-24 h-24 bg-purple-100 rounded-full opacity-20 animate-bounce"></div>
+        <div className="absolute top-10 sm:top-20 left-4 sm:left-10 w-16 sm:w-32 h-16 sm:h-32 bg-blue-100 rounded-full opacity-20 animate-pulse"></div>
+        <div className="absolute bottom-10 sm:bottom-20 right-4 sm:right-10 w-12 sm:w-24 h-12 sm:h-24 bg-purple-100 rounded-full opacity-20 animate-bounce"></div>
         
         <div className="max-w-7xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-16 items-start">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
             {/* Left Content - Services */}
-            <div className="space-y-8">
+            <div className="space-y-6 sm:space-y-8">
               {/* Section Title */}
-              <div className="space-y-4">
-                <h2 className={`text-4xl lg:text-5xl font-black leading-tight ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+              <div className="space-y-3 sm:space-y-4 text-center lg:text-left">
+                <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black leading-tight ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                   WHAT I CAN DO FOR YOU
                 </h2>
-                <p className={`text-lg leading-relaxed max-w-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                <p className={`text-base sm:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                   As a full-stack developer, I am a problem solver, crafting digital solutions that connect deeply and spark innovation.
                 </p>
               </div>
 
               {/* Services List */}
-              <div className="space-y-2">
+              <div className="space-y-1 sm:space-y-2">
                 {/* Service 1 - Web Development */}
                 <div className={`border-b transition-colors ${isDarkMode ? 'border-gray-700 hover:border-gray-600' : 'border-gray-200 hover:border-gray-400'}`}>
                   <button
                     onClick={() => toggleService(1)}
-                    className={`w-full flex justify-between items-center py-6 text-left transition-colors ${isDarkMode ? 'hover:text-lime-400' : 'hover:text-blue-600'}`}
+                    className={`w-full flex justify-between items-center py-4 sm:py-6 text-left transition-colors ${isDarkMode ? 'hover:text-lime-400' : 'hover:text-blue-600'}`}
                   >
-                    <span className={`text-xl lg:text-2xl font-bold flex items-center gap-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                    <span className={`text-lg sm:text-xl lg:text-2xl font-bold flex items-center gap-3 sm:gap-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                       <span className={`text-lg ${isDarkMode ? 'text-lime-400' : 'text-blue-600'}`}>1.</span>
                       WEB DEVELOPMENT
                     </span>

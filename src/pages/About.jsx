@@ -75,46 +75,46 @@ function About() {
       )}
 
       {/* Main Content */}
-      <main className="pt-20">
+      <main className="pt-16 sm:pt-20">
         
         {/* Hero Section */}
-        <section className={`py-20 px-6 lg:px-12 min-h-screen flex items-center transition-colors duration-500 ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
+        <section className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-12 min-h-screen flex items-center transition-colors duration-500 ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
           <div className="max-w-7xl mx-auto w-full">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-20 items-center">
               
               {/* Left Content */}
-              <div className="space-y-8">
+              <div className="space-y-6 sm:space-y-8 text-center lg:text-left">
                 <div>
-                  <h1 className={`text-5xl lg:text-7xl font-black tracking-tight mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                  <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-4 sm:mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                     ABOUT ME
                   </h1>
-                  <h2 className={`text-2xl lg:text-3xl font-bold mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                  <h2 className={`text-xl sm:text-2xl lg:text-3xl font-bold mb-4 sm:mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                     ELVIS OSEI
                   </h2>
                 </div>
 
-                <div className="space-y-6">
-                  <p className={`text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                <div className="space-y-4 sm:space-y-6">
+                  <p className={`text-base sm:text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                     I'm Elvis, a passionate full-stack web developer, freelancer, and Computer Engineering student with a love for building creative digital solutions. I specialize in crafting modern, responsive websites and applications using HTML, CSS, JavaScript, React, Firebase, and Flutter.
                   </p>
                   
-                  <p className={`text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                  <p className={`text-base sm:text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                     Beyond coding, I'm exploring robotics and embedded systems (Arduino, LEGO robotics), combining my engineering background with software to create innovative projects.
                   </p>
 
-                  <p className={`text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                  <p className={`text-base sm:text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                     As a freelancer, I help individuals, startups, and businesses transform their ideas into professional, scalable, and user-friendly products — from personal portfolios to full web platforms.
                   </p>
 
-                  <p className={`text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                  <p className={`text-base sm:text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                     I'm driven by curiosity, problem-solving, and the excitement of learning. My goal is to keep growing as a developer, contribute to impactful projects, and bridge the gap between technology and real-world needs.
                   </p>
                 </div>
 
                 {/* Social Links */}
-                <div className="flex space-x-4 py-6">
-                  <a href="https://x.com/o6papi?s=21" target="_blank" rel="noopener noreferrer" className={`w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 ${isDarkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                <div className="flex justify-center lg:justify-start space-x-3 sm:space-x-4 py-4 sm:py-6">
+                  <a href="https://x.com/o6papi?s=21" target="_blank" rel="noopener noreferrer" className={`w-10 sm:w-12 h-10 sm:h-12 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 ${isDarkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+                    <svg className="w-4 sm:w-5 h-4 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                     </svg>
                   </a>
@@ -122,14 +122,19 @@ function About() {
                     <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                     </svg>
+                  </a>  
+                  <a href="https://www.instagram.com/o6elvis?igsh=MXFuc2J3c21sbWtqaQ%3D%3D&utm_source=qr" target="_blank" rel="noopener noreferrer" className={`w-10 sm:w-12 h-10 sm:h-12 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 ${isDarkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+                    <svg className="w-4 sm:w-5 h-4 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.40s-.644-1.44-1.439-1.40z"/>
+                    </svg>
                   </a>
-                  <a href="https://www.linkedin.com/in/elvis-osei-0797a1314/" target="_blank" rel="noopener noreferrer" className={`w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 ${isDarkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <a href="https://www.linkedin.com/in/elvis-osei-0797a1314/" target="_blank" rel="noopener noreferrer" className={`w-10 sm:w-12 h-10 sm:h-12 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 ${isDarkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+                    <svg className="w-4 sm:w-5 h-4 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M7.799 5.698c.589 0 1.12.051 1.606.155.485.104.901.272 1.247.505.345.233.615.542.807.928.193.386.289.863.289 1.428 0 .594-.133 1.093-.399 1.497-.266.404-.614.701-1.044.892v.041c.631.204 1.096.566 1.391 1.087.297.521.444 1.133.444 1.838 0 .612-.118 1.155-.353 1.628-.235.473-.569.864-.999 1.174-.431.31-.956.544-1.575.703-.619.158-1.307.237-2.065.237H0V5.698h7.799zm-.68 4.9c.391 0 .717-.058.976-.175.259-.116.472-.277.64-.484.167-.207.29-.453.367-.738.077-.285.116-.595.116-.93 0-.721-.21-1.274-.63-1.66-.419-.386-.98-.578-1.684-.578H2.936v4.565h4.183zm.335 5.706c.455 0 .857-.067 1.207-.202.351-.135.641-.325.871-.571.23-.246.401-.543.512-.891.112-.348.167-.737.167-1.167 0-.793-.237-1.395-.711-1.807-.474-.412-1.114-.618-1.92-.618H2.936v5.256h4.518zM16.282 7.01h5.7v1.404h-5.7V7.01zm2.85 13.613c.746 0 1.392-.176 1.938-.527.546-.351.889-.851 1.03-1.498h2.188c-.352 1.273-.937 2.226-1.757 2.859-.819.633-1.825.949-3.019.949-1.062 0-1.975-.202-2.738-.607-.763-.405-1.382-.956-1.857-1.653-.475-.697-.712-1.495-.712-2.394 0-.899.24-1.697.72-2.394.48-.697 1.121-1.248 1.924-1.653.803-.405 1.689-.607 2.658-.607 1.062 0 1.975.202 2.738.607.763.405 1.335.961 1.717 1.668.382.707.573 1.495.573 2.364 0 .157-.008.315-.024.474-.016.158-.04.305-.073.439h-6.482c.088.797.345 1.394.771 1.791.426.397.946.595 1.561.595zm2.426-4.89c-.088-.718-.306-1.266-.654-1.644-.348-.378-.784-.567-1.307-.567-.455 0-.845.125-1.17.374-.325.249-.559.555-.702.918-.143.363-.201.717-.174 1.062-.027-.041-.055-.082-.086-.124-.031-.042-.066-.079-.105-.112h4.198z"/>
                     </svg>
                   </a>
-                  <a href="https://github.com/o6elvisosei" target="_blank" rel="noopener noreferrer" className={`w-12 h-12 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 ${isDarkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
-                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                  <a href="https://github.com/o6elvisosei" target="_blank" rel="noopener noreferrer" className={`w-10 sm:w-12 h-10 sm:h-12 rounded-lg flex items-center justify-center transition-all duration-300 hover:scale-110 ${isDarkMode ? 'bg-gray-800 text-white hover:bg-gray-700' : 'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>
+                    <svg className="w-4 sm:w-5 h-4 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
                       <path d="M12 0C5.374 0 0 5.373 0 12 0 17.302 3.438 21.8 8.207 23.387c.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23A11.509 11.509 0 0112 5.803c1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576C20.566 21.797 24 17.3 24 12c0-6.627-5.373-12-12-12z"/>
                     </svg>
                   </a>
@@ -137,9 +142,9 @@ function About() {
               </div>
 
               {/* Right Content - Profile Image */}
-              <div className="flex justify-center lg:justify-end">
+              <div className="flex justify-center lg:justify-end order-first lg:order-last">
                 <div className="relative">
-                  <div className="w-80 h-96 lg:w-96 lg:h-[500px] xl:w-[420px] xl:h-[550px] rounded-3xl overflow-hidden bg-gray-200 shadow-2xl">
+                  <div className="w-64 h-80 sm:w-80 sm:h-96 md:w-80 md:h-96 lg:w-96 lg:h-[500px] xl:w-[420px] xl:h-[550px] rounded-2xl sm:rounded-3xl overflow-hidden bg-gray-200 shadow-2xl">
                     <img 
                       src={profileImage}
                       alt="Elvis Osei" 

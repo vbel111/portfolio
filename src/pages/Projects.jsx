@@ -187,51 +187,51 @@ function Projects() {
       )}
 
       {/* Main Content */}
-      <main className="pt-20">
+      <main className="pt-16 sm:pt-20">
         
         {/* Hero Section */}
-        <section className={`py-20 px-6 lg:px-12 transition-colors duration-500 ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
+        <section className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-12 transition-colors duration-500 ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
           <div className="max-w-7xl mx-auto">
-            <div className="text-center mb-16">
-              <h1 className={`text-5xl lg:text-7xl font-black tracking-tight mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+            <div className="text-center mb-12 sm:mb-16">
+              <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black tracking-tight mb-4 sm:mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                 MY PROJECTS
               </h1>
-              <p className={`text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+              <p className={`text-base sm:text-lg lg:text-xl max-w-3xl mx-auto leading-relaxed px-4 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                 A collection of my work spanning web development, mobile applications, and robotics projects. Each project represents a unique challenge and learning experience in my journey as a developer.
               </p>
             </div>
 
             {/* Project Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 sm:gap-8 mb-12 sm:mb-16">
               <div className="text-center">
-                <div className={`text-4xl lg:text-5xl font-black mb-2 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
+                <div className={`text-3xl sm:text-4xl lg:text-5xl font-black mb-1 sm:mb-2 ${isDarkMode ? 'text-blue-400' : 'text-blue-600'}`}>
                   {projects.length}
                 </div>
-                <p className={`text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                <p className={`text-xs sm:text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                   Total Projects
                 </p>
               </div>
               <div className="text-center">
-                <div className={`text-4xl lg:text-5xl font-black mb-2 ${isDarkMode ? 'text-green-400' : 'text-green-600'}`}>
+                <div className={`text-3xl sm:text-4xl lg:text-5xl font-black mb-1 sm:mb-2 ${isDarkMode ? 'text-green-400' : 'text-green-600'}`}>
                   {projects.filter(p => p.completed).length}
                 </div>
-                <p className={`text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                <p className={`text-xs sm:text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                   Completed
                 </p>
               </div>
               <div className="text-center">
-                <div className={`text-4xl lg:text-5xl font-black mb-2 ${isDarkMode ? 'text-purple-400' : 'text-purple-600'}`}>
+                <div className={`text-3xl sm:text-4xl lg:text-5xl font-black mb-1 sm:mb-2 ${isDarkMode ? 'text-purple-400' : 'text-purple-600'}`}>
                   {projects.filter(p => p.category === 'Web Development').length}
                 </div>
-                <p className={`text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                <p className={`text-xs sm:text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                   Web Apps
                 </p>
               </div>
               <div className="text-center">
-                <div className={`text-4xl lg:text-5xl font-black mb-2 ${isDarkMode ? 'text-orange-400' : 'text-orange-600'}`}>
+                <div className={`text-3xl sm:text-4xl lg:text-5xl font-black mb-1 sm:mb-2 ${isDarkMode ? 'text-orange-400' : 'text-orange-600'}`}>
                   {projects.filter(p => p.featured).length}
                 </div>
-                <p className={`text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                <p className={`text-xs sm:text-sm font-medium ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                   Featured
                 </p>
               </div>
@@ -240,14 +240,14 @@ function Projects() {
         </section>
 
         {/* Filter Section */}
-        <section className={`py-12 px-6 lg:px-12 transition-colors duration-500 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+        <section className={`py-8 sm:py-12 px-4 sm:px-6 lg:px-12 transition-colors duration-500 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
           <div className="max-w-7xl mx-auto">
-            <div className="flex flex-wrap justify-center gap-4 mb-12">
+            <div className="flex flex-wrap justify-center gap-2 sm:gap-4 mb-8 sm:mb-12">
               {categories.map((category) => (
                 <button
                   key={category}
                   onClick={() => setFilter(category)}
-                  className={`px-6 py-3 rounded-full font-medium transition-all duration-300 hover:scale-105 ${
+                  className={`px-3 sm:px-6 py-2 sm:py-3 rounded-full font-medium text-sm sm:text-base transition-all duration-300 hover:scale-105 ${
                     filter === category
                       ? isDarkMode 
                         ? 'bg-lime-500 text-black shadow-lg'
@@ -263,11 +263,11 @@ function Projects() {
             </div>
 
             {/* Projects Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
               {filteredProjects.map((project) => (
                 <div
                   key={project.id}
-                  className={`group relative rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 cursor-pointer ${
+                  className={`group relative rounded-xl sm:rounded-2xl overflow-hidden transition-all duration-500 hover:scale-105 cursor-pointer ${
                     isDarkMode ? 'bg-gray-800' : 'bg-white'
                   } shadow-xl hover:shadow-2xl`}
                   onMouseEnter={() => setHoveredProject(project.id)}
