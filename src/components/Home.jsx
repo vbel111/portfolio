@@ -1,6 +1,7 @@
 
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
+import Navbar from './Navbar.jsx'
 import { useDarkMode } from '../contexts/DarkModeContext.jsx'
 import '../App.css'
 import profileImage from '../assets/images/profile.png'
@@ -41,6 +42,8 @@ function Home() {
     window.addEventListener('scroll', handleScroll)
     return () => window.removeEventListener('scroll', handleScroll)
   }, [])
+
+  // Inline menu does not lock scroll
 
   const toggleService = (index) => {
     setExpandedService(expandedService === index ? null : index)
@@ -131,69 +134,7 @@ function Home() {
 
   return (
     <div className={`min-h-screen w-full transition-colors duration-300 ${isDarkMode ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
-      {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 w-full backdrop-blur-sm z-50 transition-all duration-300 ${isDarkMode ? 'bg-black/95' : 'bg-white/95'}`}>
-        <div className={`transition-all duration-300 ${isScrolled ? 'py-2' : 'py-3 sm:py-4'}`}>
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-12">
-            <div className="flex justify-center items-center w-full">
-              {/* Centered Navigation Container */}
-              <div className={`flex items-center space-x-3 sm:space-x-6 px-3 sm:px-6 py-2 rounded-full border-2 transition-all duration-300 hover:shadow-md ${isDarkMode ? 'bg-gray-900/80 border-lime-400/30 hover:border-lime-400/50 hover:bg-gray-900' : 'bg-white/50 border-gray-300 hover:border-gray-800 hover:bg-white'}`}>
-                {isScrolled ? (
-                  <>
-                    <div className={`font-medium text-xs sm:text-sm px-2 sm:px-4 py-1 sm:py-2 rounded-full transition-colors flex items-center space-x-1 sm:space-x-2 ${isDarkMode ? 'text-lime-400 bg-gray-800 hover:bg-gray-700' : 'text-gray-600 bg-gray-100 hover:bg-gray-200'}`}>
-                      <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 bg-lime-400 rounded-full animate-pulse"></div>
-                      <span className="hidden sm:inline">Available for work</span>
-                      <span className="sm:hidden">Available</span>
-                    </div>
-                    {/* Dark Mode Toggle */}
-                    <button
-                      onClick={toggleDarkMode}
-                      className={`w-8 sm:w-10 h-4 sm:h-5 rounded-full relative cursor-pointer transition-all duration-300 ${isDarkMode ? 'bg-lime-400' : 'bg-gray-300'}`}
-                    >
-                      <div className={`w-3 h-3 bg-white rounded-full absolute top-1 transition-all duration-300 shadow-sm ${isDarkMode ? 'translate-x-6' : 'translate-x-1'}`}></div>
-                    </button>
-                  </>
-                ) : (
-                  <>
-                    {/* Profile Image */}
-                    <div className="flex items-center">
-                      <div className={`w-10 h-10 rounded-full overflow-hidden border-2 transition-all duration-300 hover:shadow-md ${isDarkMode ? 'border-lime-400/50 hover:border-lime-400' : 'border-gray-300 hover:border-gray-800'}`}>
-                        <img 
-                          src={profileImage}
-                          alt="Profile" 
-                          className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                        />
-                      </div>
-                    </div>
-                    
-                    {/* Navigation Links */}
-                    <div className="flex items-center space-x-6">
-                      <Link to="/" className={`transition-colors font-medium ${isDarkMode ? 'text-gray-300 hover:text-lime-400' : 'text-gray-600 hover:text-gray-900'}`}>Home</Link>
-                      <Link to="/about" className={`transition-colors font-medium ${isDarkMode ? 'text-gray-300 hover:text-lime-400' : 'text-gray-600 hover:text-gray-900'}`}>About</Link>
-                      <Link to="/projects" className={`transition-colors font-medium ${isDarkMode ? 'text-gray-300 hover:text-lime-400' : 'text-gray-600 hover:text-gray-900'}`}>Projects</Link>
-                      <button onClick={handleComingSoon} className={`transition-colors font-medium ${isDarkMode ? 'text-gray-300 hover:text-lime-400' : 'text-gray-600 hover:text-gray-900'}`}>Blogs</button>
-                    </div>
-                    
-                    {/* Available for work with green dot */}
-                    <div className={`px-4 py-2 rounded-full font-medium flex items-center space-x-2 ${isDarkMode ? 'text-lime-400 bg-gray-800/50' : 'text-gray-600 bg-gray-100/50'}`}>
-                      <div className="w-2 h-2 bg-lime-400 rounded-full animate-pulse"></div>
-                      <span>Available for work</span>
-                    </div>
-
-                    {/* Dark Mode Toggle */}
-                    <button
-                      onClick={toggleDarkMode}
-                      className={`w-10 h-5 rounded-full relative cursor-pointer transition-all duration-300 ${isDarkMode ? 'bg-lime-400' : 'bg-gray-300'}`}
-                    >
-                      <div className={`w-3 h-3 bg-white rounded-full absolute top-1 transition-all duration-300 shadow-sm ${isDarkMode ? 'translate-x-6' : 'translate-x-1'}`}></div>
-                    </button>
-                  </>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar onBlogsClick={handleComingSoon} profileImage={profileImage} />
 
       {/* Coming Soon Notification */}
       {showComingSoon && (

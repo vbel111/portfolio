@@ -11,13 +11,149 @@ function App() {
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [isScrolled, setIsScrolled] = useState(false)
   const [expandedService, setExpandedService] = useState(null)
-  import Home from './components/Home'
+  const [servicesInView, setServicesInView] = useState(false)
+  const [isDarkMode, setIsDarkMode] = useState(false)
+  const [currentProject, setCurrentProject] = useState(0)
 
-  function App() {
-    return <Home />
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 100)
+      
+      // Check if services section is in view
+      const servicesSection = document.getElementById('services-section')
+      if (servicesSection) {
+        const rect = servicesSection.getBoundingClientRect()
+        const isInView = rect.top < window.innerHeight && rect.bottom > 0
+        setServicesInView(isInView)
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll)
+    return () => window.removeEventListener('scroll', handleScroll)
+  }, [])
+
+  useEffect(() => {
+    // Apply dark mode class to document
+    if (isDarkMode) {
+      document.documentElement.classList.add('dark')
+    } else {
+      document.documentElement.classList.remove('dark')
+    }
+  }, [isDarkMode])
+
+  const toggleService = (index) => {
+    setExpandedService(expandedService === index ? null : index)
   }
 
-  export default App
+  const toggleDarkMode = () => {
+    setIsDarkMode(!isDarkMode)
+  }
+
+  // Projects data
+  const projects = [
+    {
+      id: 1,
+      title: "GAMESPECHUB",
+      description: "A comprehensive gaming platform connecting gamers with the latest specs, reviews, and community features. Built with modern web technologies.",
+      category: "Web Development",
+      categoryColor: "blue",
+      image: gamespechubImage
+    },
+    {
+      id: 2,
+      title: "JUSTLETITOUT",
+      description: "A mental health platform providing safe spaces for expression and community support. Empowering users to share and heal together.",
+      category: "Mental Health",
+      categoryColor: "purple",
+      image: justletitoutImage
+    },
+    {
+      id: 3,
+      title: "KWIKBUDGET",
+      description: "A smart budgeting application helping users manage finances with intelligent insights and tracking. Make informed financial decisions.",
+      category: "Finance",
+      categoryColor: "green",
+      image: kwikbudgetImage
+    },
+    {
+      id: 4,
+      title: "STRATOBET",
+      description: "A strategic gaming platform with advanced analytics and competitive features for esports enthusiasts. Elevate your gaming strategy.",
+      category: "Gaming",
+      categoryColor: "red",
+      image: stratobetImage
+    }
+  ]
+
+  // Navigation functions
+  const nextProject = () => {
+    setCurrentProject((prev) => (prev + 1) % projects.length)
+  }
+
+  const prevProject = () => {
+    setCurrentProject((prev) => (prev - 1 + projects.length) % projects.length)
+  }
+
+  // Touch/swipe handlers
+  const [touchStart, setTouchStart] = useState(null)
+  const [touchEnd, setTouchEnd] = useState(null)
+
+  const minSwipeDistance = 50
+
+  const onTouchStart = (e) => {
+    setTouchEnd(null)
+    setTouchStart(e.targetTouches[0].clientX)
+  }
+
+  const onTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX)
+  }
+
+  const onTouchEnd = () => {
+    if (!touchStart || !touchEnd) return
+    const distance = touchStart - touchEnd
+    const isLeftSwipe = distance > minSwipeDistance
+    const isRightSwipe = distance < -minSwipeDistance
+    
+    if (isLeftSwipe) {
+      nextProject()
+    } else if (isRightSwipe) {
+      prevProject()
+    }
+  }
+
+  const getCategoryColorClass = (color) => {
+    const colorMap = {
+      blue: 'bg-blue-600',
+      purple: 'bg-purple-600',
+      green: 'bg-green-600',
+      red: 'bg-red-600'
+    }
+    return colorMap[color] || 'bg-blue-600'
+  }
+
+  return (
+    <div className={`min-h-screen transition-colors duration-300 ${isDarkMode ? 'bg-gray-900 text-white' : 'bg-white text-gray-900'}`}>
+      {/* Navigation */}
+      <nav className={`fixed top-0 left-0 right-0 backdrop-blur-sm z-50 transition-all duration-300 ${isDarkMode ? 'bg-gray-900/95' : 'bg-white/95'}`}>
+        <div className={`transition-all duration-300 ${isScrolled ? 'py-2' : 'py-4'}`}>
+          <div className="max-w-6xl mx-auto px-6 lg:px-12">
+            <div className="flex justify-center items-center w-full">
+              {/* Centered Navigation Container */}
+              <div className={`flex items-center space-x-6 px-6 py-2 rounded-full border-2 transition-all duration-300 hover:shadow-md ${isDarkMode ? 'bg-gray-800/50 border-gray-600 hover:border-gray-500 hover:bg-gray-800' : 'bg-white/50 border-gray-300 hover:border-gray-800 hover:bg-white'}`}>
+                {isScrolled ? (
+                  <div className={`font-medium text-sm px-4 py-2 rounded-full transition-colors ${isDarkMode ? 'text-gray-300 bg-gray-700 hover:bg-gray-600' : 'text-gray-600 bg-gray-100 hover:bg-gray-200'}`}>
+                    Available for work
+                  </div>
+                ) : (
+                  <>
+                    {/* Profile Image */}
+                    <div className="flex items-center">
+                      <div className={`w-10 h-10 rounded-full overflow-hidden border-2 transition-all duration-300 hover:shadow-md ${isDarkMode ? 'border-gray-600 hover:border-gray-500' : 'border-gray-300 hover:border-gray-800'}`}>
+                        <img 
+                          src={profileImage}
+                          alt="Profile" 
+                          className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                         />
                       </div>
                     </div>

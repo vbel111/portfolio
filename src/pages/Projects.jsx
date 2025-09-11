@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useDarkMode } from '../contexts/DarkModeContext.jsx'
+import Navbar from '../components/Navbar.jsx'
 import profileImage from '../assets/images/profile.png'
 import gamespechubImage from '../assets/images/gamespechub.png'
 import justletitoutImage from '../assets/images/justletitout.png'
@@ -129,50 +130,7 @@ function Projects() {
   return (
     <div className={`min-h-screen w-full transition-colors duration-500 ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
       
-      {/* Navigation */}
-      <nav className={`fixed top-0 left-0 right-0 w-full backdrop-blur-sm z-50 transition-all duration-300 ${isDarkMode ? 'bg-black/95' : 'bg-white/95'}`}>
-        <div className="py-4">
-          <div className="max-w-6xl mx-auto px-6 lg:px-12">
-            <div className="flex justify-center items-center w-full">
-              {/* Centered Navigation Container */}
-              <div className={`flex items-center space-x-6 px-6 py-2 rounded-full border-2 transition-all duration-300 hover:shadow-md ${isDarkMode ? 'bg-gray-900/80 border-lime-400/30 hover:border-lime-400/50 hover:bg-gray-900' : 'bg-white/50 border-gray-300 hover:border-gray-800 hover:bg-white'}`}>
-                {/* Profile Image */}
-                <div className="flex items-center">
-                  <div className={`w-10 h-10 rounded-full overflow-hidden border-2 transition-all duration-300 hover:shadow-md ${isDarkMode ? 'border-lime-400/50 hover:border-lime-400' : 'border-gray-300 hover:border-gray-800'}`}>
-                    <img 
-                      src={profileImage}
-                      alt="Profile" 
-                      className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                    />
-                  </div>
-                </div>
-                
-                {/* Navigation Links */}
-                <div className="flex items-center space-x-6">
-                  <Link to="/" className={`transition-colors font-medium ${isDarkMode ? 'text-gray-300 hover:text-lime-400' : 'text-gray-600 hover:text-gray-900'}`}>Home</Link>
-                  <Link to="/about" className={`transition-colors font-medium ${isDarkMode ? 'text-gray-300 hover:text-lime-400' : 'text-gray-600 hover:text-gray-900'}`}>About</Link>
-                  <Link to="/projects" className={`transition-colors font-medium ${isDarkMode ? 'text-lime-400' : 'text-gray-900'}`}>Projects</Link>
-                  <button onClick={handleComingSoon} className={`transition-colors font-medium ${isDarkMode ? 'text-gray-300 hover:text-lime-400' : 'text-gray-600 hover:text-gray-900'}`}>Blogs</button>
-                </div>
-                
-                {/* Available for work with green dot */}
-                <div className={`px-4 py-2 rounded-full font-medium flex items-center space-x-2 ${isDarkMode ? 'text-lime-400 bg-gray-800/50' : 'text-gray-600 bg-gray-100/50'}`}>
-                  <div className="w-2 h-2 bg-lime-400 rounded-full animate-pulse"></div>
-                  <span>Available for work</span>
-                </div>
-
-                {/* Dark Mode Toggle */}
-                <button
-                  onClick={toggleDarkMode}
-                  className={`w-10 h-5 rounded-full relative cursor-pointer transition-all duration-300 ${isDarkMode ? 'bg-lime-400' : 'bg-gray-300'}`}
-                >
-                  <div className={`w-3 h-3 bg-white rounded-full absolute top-1 transition-all duration-300 shadow-sm ${isDarkMode ? 'translate-x-6' : 'translate-x-1'}`}></div>
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </nav>
+      <Navbar onBlogsClick={handleComingSoon} profileImage={profileImage} />
 
       {/* Coming Soon Notification */}
       {showComingSoon && (
