@@ -1,7 +1,9 @@
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { Link } from 'react-router-dom'
+import { motion, useScroll, useTransform, useInView, AnimatePresence } from 'framer-motion'
 import Navbar from './Navbar.jsx'
+import PageTransition from './PageTransition.jsx'
 import { useDarkMode } from '../contexts/DarkModeContext.jsx'
 import '../App.css'
 import profileImage from '../assets/images/profile.png'
@@ -19,11 +21,213 @@ function Home() {
   const [currentProject, setCurrentProject] = useState(0)
   const [showComingSoon, setShowComingSoon] = useState(false)
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        delayChildren: 0.3,
+        staggerChildren: 0.2
+      }
+    }
+  }
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  const heroTextVariants = {
+    hidden: { y: 50, opacity: 0 },
+    visible: (i) => ({
+      y: 0,
+      opacity: 1,
+      transition: {
+        delay: i * 0.3,
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    })
+  }
+
+  const slideInFromLeft = {
+    hidden: { x: -100, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  const slideInFromRight = {
+    hidden: { x: 100, opacity: 0 },
+    visible: {
+      x: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  const scaleIn = {
+    hidden: { scale: 0.8, opacity: 0 },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "backOut"
+      }
+    }
+  }
+
+  const floatingAnimation = {
+    y: [0, -15, 0],
+    transition: {
+      duration: 4,
+      repeat: Infinity,
+      ease: "easeInOut"
+    }
+  }
+
+  // Scroll-triggered animation variants
+  const fadeInUp = {
+    hidden: { 
+      y: 60, 
+      opacity: 0 
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  const staggerContainer = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2,
+        delayChildren: 0.1
+      }
+    }
+  }
+
+  const fadeInScale = {
+    hidden: { 
+      scale: 0.8, 
+      opacity: 0 
+    },
+    visible: {
+      scale: 1,
+      opacity: 1,
+      transition: {
+        duration: 0.6,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  const slideInFromBottom = {
+    hidden: { 
+      y: 50, 
+      opacity: 0 
+    },
+    visible: {
+      y: 0,
+      opacity: 1,
+      transition: {
+        duration: 0.7,
+        ease: "easeOut"
+      }
+    }
+  }
+
+  // Floating particles animation
+  const particlesVariants = {
+    animate: {
+      y: [0, -20, 0],
+      x: [0, 10, 0],
+      transition: {
+        duration: Math.random() * 3 + 2,
+        repeat: Infinity,
+        ease: "easeInOut"
+      }
+    }
+  }
+
+  // Typewriter effect for description
+  const [displayText, setDisplayText] = useState('')
+  const [currentIndex, setCurrentIndex] = useState(0)
+  const fullText = "I'm a Ghana-based full-stack developer and aspiring robotics engineer passionate about crafting meaningful digital experiences."
+  
+  useEffect(() => {
+    if (currentIndex < fullText.length) {
+      const timeout = setTimeout(() => {
+        setDisplayText(prev => prev + fullText[currentIndex])
+        setCurrentIndex(prev => prev + 1)
+      }, 50) // Adjust speed here (50ms per character)
+      
+      return () => clearTimeout(timeout)
+    }
+  }, [currentIndex, fullText])
+
   // Show coming soon notification
   const handleComingSoon = (e) => {
     e.preventDefault()
     setShowComingSoon(true)
     setTimeout(() => setShowComingSoon(false), 3000)
+  }
+
+  // Animated Counter Component
+  const AnimatedCounter = ({ endValue, duration = 2, suffix = "" }) => {
+    const [count, setCount] = useState(0)
+    const counterRef = useRef(null)
+    const isInView = useInView(counterRef, { once: true })
+
+    useEffect(() => {
+      if (isInView) {
+        let startTime = null
+        const startValue = 0
+
+        const animateCount = (timestamp) => {
+          if (!startTime) startTime = timestamp
+          const progress = Math.min((timestamp - startTime) / (duration * 1000), 1)
+          
+          const currentCount = Math.floor(progress * (endValue - startValue) + startValue)
+          setCount(currentCount)
+
+          if (progress < 1) {
+            requestAnimationFrame(animateCount)
+          }
+        }
+
+        requestAnimationFrame(animateCount)
+      }
+    }, [isInView, endValue, duration])
+
+    return (
+      <span ref={counterRef}>
+        {count}{suffix}
+      </span>
+    )
   }
 
   useEffect(() => {
@@ -133,59 +337,146 @@ function Home() {
   }
 
   return (
-    <div className={`min-h-screen w-full transition-colors duration-300 ${isDarkMode ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
-      <Navbar onBlogsClick={handleComingSoon} profileImage={profileImage} />
+    <PageTransition>
+      <div className={`min-h-screen w-full transition-colors duration-300 ${isDarkMode ? 'bg-black text-white' : 'bg-white text-gray-900'}`}>
+        <Navbar onBlogsClick={handleComingSoon} profileImage={profileImage} />
 
-      {/* Coming Soon Notification */}
-      {showComingSoon && (
-        <div className={`fixed top-24 right-6 z-50 px-6 py-3 rounded-lg shadow-lg transform transition-all duration-500 ease-in-out ${isDarkMode ? 'bg-lime-400 text-black' : 'bg-blue-600 text-white'}`}>
-          <div className="flex items-center space-x-3">
-            <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
-            </svg>
-            <span className="font-medium">Blogs Coming Soon!</span>
-          </div>
-        </div>
-      )}
+        {/* Coming Soon Notification */}
+        <AnimatePresence>
+          {showComingSoon && (
+            <motion.div 
+              initial={{ opacity: 0, x: 100, scale: 0.8 }}
+              animate={{ opacity: 1, x: 0, scale: 1 }}
+              exit={{ opacity: 0, x: 100, scale: 0.8 }}
+              transition={{ duration: 0.4, ease: "easeOut" }}
+              className={`fixed top-24 right-6 z-50 px-6 py-3 rounded-lg shadow-lg transform ${isDarkMode ? 'bg-lime-400 text-black' : 'bg-blue-600 text-white'}`}
+            >
+              <div className="flex items-center space-x-3">
+                <motion.svg 
+                  animate={{ rotate: [0, 360] }}
+                  transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+                  className="w-5 h-5" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                </motion.svg>
+                <span className="font-medium">Blogs Coming Soon!</span>
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
 
       {/* Hero Section */}
-      <section className="pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-12 min-h-screen flex items-center">
-        <div className="max-w-7xl mx-auto w-full">
+      <motion.section 
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="pt-16 sm:pt-20 md:pt-24 pb-12 sm:pb-16 md:pb-20 px-4 sm:px-6 lg:px-12 min-h-screen flex items-center relative overflow-hidden"
+      >
+        {/* Floating Particles Background */}
+        {[...Array(8)].map((_, i) => (
+          <motion.div
+            key={i}
+            variants={particlesVariants}
+            animate="animate"
+            className={`absolute w-2 h-2 rounded-full ${isDarkMode ? 'bg-lime-400/20' : 'bg-blue-400/20'}`}
+            style={{
+              left: `${Math.random() * 100}%`,
+              top: `${Math.random() * 100}%`,
+              animationDelay: `${Math.random() * 2}s`
+            }}
+          />
+        ))}
+        
+        <div className="max-w-7xl mx-auto w-full relative z-10">
           {/* Main Layout: Three columns fitting the page */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 sm:gap-8 lg:gap-16 items-center h-full">
             
             {/* Left Content - Name and FULL STACK */}
-            <div className="flex flex-col justify-center space-y-3 sm:space-y-4 text-center lg:text-left">
+            <motion.div 
+              variants={slideInFromLeft}
+              className="flex flex-col justify-center space-y-3 sm:space-y-4 text-center lg:text-left"
+            >
               {/* Name above FULL STACK */}
               <div>
-                <h2 className={`text-sm sm:text-base lg:text-lg font-normal tracking-[0.2em] sm:tracking-[0.3em] uppercase mb-3 sm:mb-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
-                  ELVIS OSEI
-                </h2>
-                <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black leading-[0.85] tracking-tight ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                  FULL STACK
-                </h1>
+                <motion.h2 
+                  variants={heroTextVariants}
+                  custom={0}
+                  className={`text-sm sm:text-base lg:text-lg font-normal tracking-[0.2em] sm:tracking-[0.3em] uppercase mb-3 sm:mb-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} overflow-hidden`}
+                >
+                  <motion.span
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.5, duration: 0.8 }}
+                    className="inline-block"
+                  >
+                    ELVIS OSEI
+                  </motion.span>
+                </motion.h2>
+                <motion.h1 
+                  variants={heroTextVariants}
+                  custom={1}
+                  className={`text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black leading-[0.85] tracking-tight ${isDarkMode ? 'text-white' : 'text-gray-900'} overflow-hidden`}
+                >
+                  <motion.span
+                    initial={{ y: 50, opacity: 0 }}
+                    animate={{ y: 0, opacity: 1 }}
+                    transition={{ delay: 0.8, duration: 0.8 }}
+                    className="inline-block"
+                  >
+                    FULL STACK
+                  </motion.span>
+                </motion.h1>
               </div>
-            </div>
+            </motion.div>
 
             {/* Center Content - Profile Image with Dark Mode Toggle */}
-            <div className="relative flex justify-center items-center order-first lg:order-none">
+            <motion.div 
+              variants={scaleIn}
+              className="relative flex justify-center items-center order-first lg:order-none"
+            >
               <div className="relative">
                 {/* Main Profile Image Container */}
-                <div className="w-64 h-72 sm:w-72 sm:h-80 md:w-80 md:h-96 lg:w-80 lg:h-96 xl:w-[350px] xl:h-[420px] rounded-2xl sm:rounded-3xl overflow-hidden bg-gray-200 hover:scale-105 transition-transform duration-500 cursor-pointer group shadow-2xl">
-                  <img 
+                <motion.div 
+                  animate={floatingAnimation}
+                  whileHover={{ 
+                    scale: 1.05, 
+                    rotateY: 5,
+                    transition: { duration: 0.3 }
+                  }}
+                  className="w-64 h-72 sm:w-72 sm:h-80 md:w-80 md:h-96 lg:w-80 lg:h-96 xl:w-[350px] xl:h-[420px] rounded-2xl sm:rounded-3xl overflow-hidden bg-gray-200 cursor-pointer group shadow-2xl"
+                >
+                  <motion.img 
                     src={profileImage}
                     alt="Profile" 
-                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                    initial={{ scale: 1.2, opacity: 0 }}
+                    animate={{ scale: 1, opacity: 1 }}
+                    transition={{ delay: 1, duration: 1 }}
+                    whileHover={{ scale: 1.1 }}
+                    className="w-full h-full object-cover"
                   />
                   
                   {/* Overlay on hover */}
-                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${isDarkMode ? 'bg-lime-600/5' : 'bg-blue-600/5'}`}></div>
-                </div>
+                  <motion.div 
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    className={`absolute inset-0 transition-opacity duration-300 ${isDarkMode ? 'bg-lime-600/5' : 'bg-blue-600/5'}`}
+                  ></motion.div>
+                </motion.div>
 
                 {/* Dark Mode Toggle Switch */}
-                <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2">
-                  <button
+                <motion.div 
+                  initial={{ y: 50, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{ delay: 1.2, duration: 0.6 }}
+                  className="absolute bottom-8 left-1/2 transform -translate-x-1/2"
+                >
+                  <motion.button
                     onClick={toggleDarkMode}
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.95 }}
                     className={`w-16 h-8 rounded-full relative cursor-pointer transition-all duration-500 shadow-lg ${isDarkMode ? 'bg-lime-500' : 'bg-gray-300'}`}
                   >
                     <div className={`w-6 h-6 bg-white rounded-full absolute top-1 transition-all duration-500 shadow-sm flex items-center justify-center ${isDarkMode ? 'translate-x-8' : 'translate-x-1'}`}>
@@ -199,8 +490,8 @@ function Home() {
                         </svg>
                       )}
                     </div>
-                  </button>
-                </div>
+                  </motion.button>
+                </motion.div>
 
                 {/* Wave Icon at bottom corner */}
                 <div className="absolute -bottom-4 -right-4">
@@ -218,67 +509,147 @@ function Home() {
                   </div>
                 </div>
               </div>
-            </div>
+            </motion.div>
 
             {/* Right Content - DEVELOPER and Description */}
-            <div className="flex flex-col justify-center space-y-4 sm:space-y-6 text-center lg:text-left">
+            <motion.div 
+              variants={slideInFromRight}
+              className="flex flex-col justify-center space-y-4 sm:space-y-6 text-center lg:text-left"
+            >
               {/* DEVELOPER title */}
               <div>
-                <h1 className={`text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black leading-[0.85] tracking-tight ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                  DEVELOPER
-                </h1>
+                <motion.h1 
+                  variants={heroTextVariants}
+                  custom={2}
+                  className={`text-4xl sm:text-5xl md:text-6xl lg:text-6xl xl:text-7xl font-black leading-[0.85] tracking-tight ${isDarkMode ? 'text-white' : 'text-gray-900'} overflow-hidden`}
+                >
+                  <motion.span
+                    initial="hidden"
+                    animate="visible"
+                    transition={{ staggerChildren: 0.1, delayChildren: 1.1 }}
+                    className="inline-block"
+                  >
+                    {"DEVELOPER".split("").map((letter, index) => (
+                      <motion.span
+                        key={index}
+                        variants={{
+                          hidden: { y: 50, opacity: 0 },
+                          visible: { y: 0, opacity: 1 }
+                        }}
+                        transition={{ duration: 0.5 }}
+                        className="inline-block"
+                      >
+                        {letter}
+                      </motion.span>
+                    ))}
+                  </motion.span>
+                </motion.h1>
               </div>
 
               {/* Description below DEVELOPER */}
               <div className="max-w-sm mx-auto lg:mx-0">
-                <p className={`leading-relaxed text-sm sm:text-base ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                  I'm a Ghana-based full-stack developer and aspiring robotics engineer passionate about 
-                  crafting meaningful digital experiences.
-                </p>
+                <motion.p 
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 1.5, duration: 0.5 }}
+                  className={`leading-relaxed text-sm sm:text-base ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}
+                >
+                  {displayText}
+                  <motion.span
+                    animate={{ opacity: [1, 0, 1] }}
+                    transition={{ duration: 1, repeat: Infinity }}
+                    className={`inline-block w-0.5 h-4 ml-1 ${isDarkMode ? 'bg-lime-400' : 'bg-blue-600'}`}
+                  />
+                </motion.p>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
-      </section>
+      </motion.section>
 
       {/* Services Section */}
-      <section id="services-section" className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-12 relative overflow-hidden transition-colors duration-500 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}>
+      <motion.section 
+        id="services-section" 
+        className={`py-12 sm:py-16 md:py-20 px-4 sm:px-6 lg:px-12 relative overflow-hidden transition-colors duration-500 ${isDarkMode ? 'bg-gray-900' : 'bg-gray-50'}`}
+      >
         {/* Background decorative elements */}
-        <div className="absolute top-10 sm:top-20 left-4 sm:left-10 w-16 sm:w-32 h-16 sm:h-32 bg-blue-100 rounded-full opacity-20 animate-pulse"></div>
-        <div className="absolute bottom-10 sm:bottom-20 right-4 sm:right-10 w-12 sm:w-24 h-12 sm:h-24 bg-purple-100 rounded-full opacity-20 animate-bounce"></div>
+        <motion.div 
+          initial={{ scale: 0, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 0.2 }}
+          transition={{ duration: 1, delay: 0.2 }}
+          viewport={{ once: true }}
+          className="absolute top-10 sm:top-20 left-4 sm:left-10 w-16 sm:w-32 h-16 sm:h-32 bg-blue-100 rounded-full animate-pulse"
+        ></motion.div>
+        <motion.div 
+          initial={{ scale: 0, opacity: 0 }}
+          whileInView={{ scale: 1, opacity: 0.2 }}
+          transition={{ duration: 1, delay: 0.4 }}
+          viewport={{ once: true }}
+          className="absolute bottom-10 sm:bottom-20 right-4 sm:right-10 w-12 sm:w-24 h-12 sm:h-24 bg-purple-100 rounded-full animate-bounce"
+        ></motion.div>
         
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start">
+          <motion.div 
+            variants={staggerContainer}
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-100px" }}
+            className="grid grid-cols-1 lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-start"
+          >
             {/* Left Content - Services */}
-            <div className="space-y-6 sm:space-y-8">
+            <motion.div variants={fadeInUp} className="space-y-6 sm:space-y-8">
               {/* Section Title */}
-              <div className="space-y-3 sm:space-y-4 text-center lg:text-left">
-                <h2 className={`text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black leading-tight ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+              <motion.div variants={fadeInUp} className="space-y-3 sm:space-y-4 text-center lg:text-left">
+                <motion.h2 
+                  variants={fadeInUp}
+                  className={`text-3xl sm:text-4xl md:text-5xl lg:text-5xl font-black leading-tight ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
+                >
                   WHAT I CAN DO FOR YOU
-                </h2>
-                <p className={`text-base sm:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                </motion.h2>
+                <motion.p 
+                  variants={fadeInUp}
+                  className={`text-base sm:text-lg leading-relaxed max-w-lg mx-auto lg:mx-0 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}
+                >
                   As a full-stack developer, I am a problem solver, crafting digital solutions that connect deeply and spark innovation.
-                </p>
-              </div>
+                </motion.p>
+              </motion.div>
 
               {/* Services List */}
-              <div className="space-y-1 sm:space-y-2">
+              <motion.div variants={fadeInUp} className="space-y-1 sm:space-y-2">
                 {/* Service 1 - Web Development */}
                 <div className={`border-b transition-colors ${isDarkMode ? 'border-gray-700 hover:border-gray-600' : 'border-gray-200 hover:border-gray-400'}`}>
-                  <button
+                  <motion.button
                     onClick={() => toggleService(1)}
-                    className={`w-full flex justify-between items-center py-4 sm:py-6 text-left transition-colors ${isDarkMode ? 'hover:text-lime-400' : 'hover:text-blue-600'}`}
+                    whileHover={{ 
+                      scale: 1.02,
+                      x: 10
+                    }}
+                    whileTap={{ scale: 0.98 }}
+                    className={`w-full flex justify-between items-center py-4 sm:py-6 text-left transition-colors ${isDarkMode ? 'hover:text-lime-400' : 'hover:text-blue-600'} cursor-pointer group`}
                   >
-                    <span className={`text-lg sm:text-xl lg:text-2xl font-bold flex items-center gap-3 sm:gap-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                      <span className={`text-lg ${isDarkMode ? 'text-lime-400' : 'text-blue-600'}`}>1.</span>
+                    <motion.span 
+                      className={`text-lg sm:text-xl lg:text-2xl font-bold flex items-center gap-3 sm:gap-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}
+                      whileHover={{ x: 5 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                    >
+                      <motion.span 
+                        className={`text-lg ${isDarkMode ? 'text-lime-400' : 'text-blue-600'}`}
+                        whileHover={{ scale: 1.2, rotate: 360 }}
+                        transition={{ duration: 0.5 }}
+                      >
+                        1.
+                      </motion.span>
                       WEB DEVELOPMENT
-                    </span>
-                    <div className={`transition-transform duration-300 ${expandedService === 1 ? 'rotate-180' : ''}`}>
+                    </motion.span>
+                    <motion.div 
+                      className={`transition-transform duration-300 ${expandedService === 1 ? 'rotate-180' : ''}`}
+                      whileHover={{ scale: 1.1, rotate: expandedService === 1 ? 180 : 15 }}
+                    >
                       <svg className={`w-6 h-6 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`} fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M19 9l-7 7-7-7"/>
                       </svg>
-                    </div>
-                  </button>
+                    </motion.div>
+                  </motion.button>
                   <div className={`overflow-hidden transition-all duration-500 ease-in-out ${expandedService === 1 ? 'max-h-48 opacity-100 pb-6' : 'max-h-0 opacity-0'}`}>
                     <div className={`space-y-3 pl-8 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                       <p className="flex items-start gap-3">
@@ -408,11 +779,11 @@ function Home() {
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
             {/* Right Content - Animated Workspace Image */}
-            <div className="relative flex justify-center lg:justify-end">
+            <motion.div variants={fadeInScale} className="relative flex justify-center lg:justify-end">
               <div className={`relative group transition-all duration-1000 ${servicesInView ? 'transform translate-y-0 opacity-100' : 'transform translate-y-20 opacity-30'}`}>
                 {/* Workspace Image Container with Enhanced Animation */}
                 <div className="w-96 h-80 lg:w-[500px] lg:h-[400px] rounded-3xl overflow-hidden bg-gray-200 hover:scale-105 transition-all duration-700 cursor-pointer shadow-2xl transform hover:rotate-3 hover:skew-y-1 perspective-1000 group-hover:shadow-3xl">
@@ -458,10 +829,10 @@ function Home() {
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
+            </motion.div>
+          </motion.div>
         </div>
-      </section>
+      </motion.section>
 
       {/* About Me Section */}
       <section className={`py-20 px-6 lg:px-12 min-h-screen flex items-center transition-colors duration-500 ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
@@ -486,24 +857,38 @@ function Home() {
               </div>
 
               {/* Stats */}
-              <div className="grid grid-cols-2 gap-8 py-8">
-                <div>
-                  <div className={`text-4xl lg:text-5xl font-black ${isDarkMode ? 'text-green-400' : 'text-blue-600'}`}>
-                    2+
-                  </div>
+              <motion.div 
+                variants={staggerContainer}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: true }}
+                className="grid grid-cols-2 gap-8 py-8"
+              >
+                <motion.div variants={fadeInScale}>
+                  <motion.div 
+                    className={`text-4xl lg:text-5xl font-black ${isDarkMode ? 'text-green-400' : 'text-blue-600'}`}
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <AnimatedCounter endValue={2} suffix="+" />
+                  </motion.div>
                   <p className={`text-sm font-medium mt-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                     Years of Experience
                   </p>
-                </div>
-                <div>
-                  <div className={`text-4xl lg:text-5xl font-black ${isDarkMode ? 'text-green-400' : 'text-blue-600'}`}>
-                    20+
-                  </div>
+                </motion.div>
+                <motion.div variants={fadeInScale}>
+                  <motion.div 
+                    className={`text-4xl lg:text-5xl font-black ${isDarkMode ? 'text-green-400' : 'text-blue-600'}`}
+                    whileHover={{ scale: 1.1 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                  >
+                    <AnimatedCounter endValue={20} suffix="+" />
+                  </motion.div>
                   <p className={`text-sm font-medium mt-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                     Completed Projects
                   </p>
-                </div>
-              </div>
+                </motion.div>
+              </motion.div>
 
               {/* Contact Info */}
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -925,7 +1310,8 @@ function Home() {
           </div>
         </div>
       </footer>
-    </div>
+      </div>
+    </PageTransition>
   )
 }
 
