@@ -58,7 +58,7 @@ function Projects() {
       longDescription: "KwikBudget is a personal finance management app that helps users track expenses, set budgets, and achieve financial goals. Features include expense categorization, budget alerts, and detailed financial analytics.",
       category: "Mobile App",
       categoryColor: "green",
-      technologies: ["Flutter", "Dart", "Firebase", "Charts"],
+      technologies: ["React Native", "Expo", "Firebase", "Charts"],
       image: kwikbudgetImage,
       liveUrl: "https://kwik-budget.web.app/",
       githubUrl: "#",

@@ -1107,12 +1107,12 @@ function Home() {
 
           {/* Browse All Projects Button */}
           <div className="flex justify-center mt-12">
-            <a 
-              href="/projects"
+            <Link 
+              to="/projects"
               className={`px-8 py-4 rounded-full font-semibold text-base transition-all duration-300 hover:scale-105 transform ${isDarkMode ? 'bg-lime-500 text-black hover:bg-lime-600 shadow-lg hover:shadow-xl' : 'bg-blue-600 text-white hover:bg-blue-700 shadow-lg hover:shadow-xl'}`}
             >
               BROWSE ALL PROJECTS
-            </a>
+            </Link>
           </div>
         </div>
       </section>

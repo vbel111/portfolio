@@ -343,11 +343,11 @@ function App() {
                     <div className={`space-y-3 pl-8 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
                       <p className="flex items-start gap-3">
                         <span className="text-blue-600 mt-1">✓</span>
-                        Develop cross-platform mobile apps using Flutter.
+                        Develop cross-platform mobile apps using React Native and Expo.
                       </p>
                       <p className="flex items-start gap-3">
                         <span className="text-blue-600 mt-1">✓</span>
-                        Turn existing websites into lightweight, mobile-friendly apps.
+                        Build iOS and Android apps from a single JavaScript codebase.
                       </p>
                     </div>
                   </div>

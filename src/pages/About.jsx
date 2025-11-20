@@ -53,7 +53,7 @@ function About() {
 
                 <div className="space-y-4 sm:space-y-6">
                   <p className={`text-base sm:text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                    I'm Elvis, a passionate full-stack web developer, freelancer, and Computer Engineering student with a love for building creative digital solutions. I specialize in crafting modern, responsive websites and applications using HTML, CSS, JavaScript, React, Firebase, and Flutter.
+                    I'm Elvis, a passionate full-stack web developer, freelancer, and Computer Engineering student with a love for building creative digital solutions. I specialize in crafting modern, responsive websites and applications using HTML, CSS, JavaScript, React, Firebase, and React Native with Expo.
                   </p>
                   
                   <p className={`text-base sm:text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
@@ -122,7 +122,7 @@ function About() {
                     MY TECH STACK
                   </h2>
                   <p className={`text-lg leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-                    I build with purpose using modern technologies. React for dynamic web applications. Firebase for backend solutions. Flutter for cross-platform mobile apps. Each tool helps me deliver scalable, user-focused solutions.
+                    I build with purpose using modern technologies. React for dynamic web applications. Firebase for backend solutions. React Native and Expo for cross-platform mobile apps. Each tool helps me deliver scalable, user-focused solutions.
                   </p>
                 </div>
 
@@ -163,19 +163,20 @@ function About() {
                     </div>
                   </div>
 
-                  {/* Flutter */}
+                  {/* React Native & Expo */}
                   <div className="flex items-start space-x-4">
-                    <div className="w-16 h-16 bg-blue-400 rounded-xl flex items-center justify-center flex-shrink-0">
+                    <div className="w-16 h-16 bg-cyan-500 rounded-xl flex items-center justify-center flex-shrink-0">
                       <svg className="w-8 h-8 text-white" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M14.314 0L2.3 12 6 15.7 21.684.013h-7.37zm.159 11.871L11.91 14.43l-4.457-4.457 2.563-2.563 4.457 4.457zm5.843 1.13L15.46 18.86l-4.457-4.457 4.856-4.856L20.316 13z"/>
+                        <path d="M12 2.5a9.5 9.5 0 100 19 9.5 9.5 0 000-19zm0 17a7.5 7.5 0 110-15 7.5 7.5 0 010 15z"/>
+                        <path d="M12 7.5a4.5 4.5 0 100 9 4.5 4.5 0 000-9zm0 7a2.5 2.5 0 110-5 2.5 2.5 0 010 5z"/>
                       </svg>
                     </div>
                     <div>
                       <h3 className={`text-xl font-bold mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                        Flutter
+                        React Native & Expo
                       </h3>
                       <p className={`text-sm leading-relaxed ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                        For cross-platform mobile development, creating beautiful native apps for both iOS and Android from a single codebase.
+                        For cross-platform mobile app development, building beautiful native iOS and Android apps using React and JavaScript with Expo.
                       </p>
                     </div>
                   </div>
