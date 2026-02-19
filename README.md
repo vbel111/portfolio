@@ -1,12 +1,53 @@
-# React + Vite
+# Elvis Osei
+Full Stack & Mobile Developer • Robotics Instructor
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Hi — I'm Elvis (vbel111). I build web and mobile apps with a focus on clean, maintainable code and delightful user experiences. I work across frontend and backend, and I enjoy teaching robotics and building projects that combine hardware and software.
 
-Currently, two official plugins are available:
+## Quick facts
+- Role: Full Stack & Mobile Developer
+- Teaching: Robotics instructor
+- Location: Ghana, Accra
+- Hobbies: Football, music, games
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Tech & tools
+- Frontend: React, HTML, CSS
+- Mobile: React Native / cross-platform mobile approaches
+- Backend / Databases: Firebase, Supabase
+- Languages: JavaScript, Python, C
+- Other: Git, Vite, ESLint, testing basics
 
-## Expanding the ESLint configuration
+## Selected projects
+- JLIO 
+- Gamespechub
+- Personal portfolio (this repo) — website built with React + Vite to showcase projects and contact info.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+(If you'd like, I can expand each project above with links, screenshots, tech details, and key accomplishments.)
+
+## Experience
+- Robotics Instructor — I teach robotics fundamentals including sensors, actuators, microcontrollers, and embedded programming. I enjoy guiding students through hands-on projects that combine code with real-world hardware.
+
+## How to run this site locally
+This repository contains my portfolio site. To run it locally:
+1. Clone the repo:
+   git clone https://github.com/vbel111/portfolio.git
+2. Install dependencies:
+   npm install
+3. Run the dev server:
+   npm run dev
+4. Build for production:
+   npm run build
+
+(Adjust commands if you use yarn or pnpm.)
+
+## Contact
+- GitHub: [vbel111](https://github.com/vbel111)
+- Email: xelpap@gmail.com
+  
+- Portfolio: https://o6elvis.dev
+
+## Interests
+- Football — I enjoy playing and following matches.
+- Music — I listen to and explore different genres for inspiration.
+
+---
+
